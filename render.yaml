@@ -6,10 +6,9 @@ services:
     buildCommand: "./bin/render-build.sh"
     startCommand: "bundle exec puma -C config/puma.rb"
     envVars:
-      - key: CHAT_GPT_SESSION_TOKEN
       - key: DISCORD_BOT_TOKEN
+      - key: CHAT_GPT_SESSION_TOKEN
       - fromGroup: GPTBotEnvs
-
 
 envVarGroups:
   - name: GPTBotEnvs
