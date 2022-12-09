@@ -1,5 +1,5 @@
 import discord
-import responses
+import gpt_client
 import os
 import traceback
 from discord.ext import commands
@@ -19,7 +19,7 @@ async def send_message(message, user_message, is_private):
             reply = await message.channel.send(thinking_message)
 
         # streamed
-        response = responses.streamed_response(user_message)
+        response = gpt_client.streamed_response(user_message)
         content = ""
         for res in response:
             # print(res['message'])
@@ -30,7 +30,7 @@ async def send_message(message, user_message, is_private):
         await reply.edit(content=content)
 
       
-        # response = responses.handle_response(user_message)
+        # response = gpt_client.handle_response(user_message)
         # await reply.edit(content=response)
 
     except Exception as e:
