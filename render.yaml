@@ -8,4 +8,13 @@ services:
     envVars:
       - key: CHAT_GPT_SESSION_TOKEN
       - key: DISCORD_BOT_TOKEN
-      envGroup: GPTBotEnvs
+      - fromGroup: GPTBotEnvs
+
+
+envVarGroups:
+  - name: GPTBotEnvs
+    envVars:
+      - key: CHAT_GPT_SESSION_TOKEN
+        sync: false
+      - key: DISCORD_BOT_TOKEN
+        sync: false
