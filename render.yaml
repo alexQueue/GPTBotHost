@@ -7,7 +7,9 @@ services:
     startCommand: "bundle exec puma -C config/puma.rb"
     envVars:
       - key: DISCORD_BOT_TOKEN
+        sync: false 
       - key: CHAT_GPT_SESSION_TOKEN
+        sync: false 
       - fromGroup: GPTBotEnvs
 
 envVarGroups:
