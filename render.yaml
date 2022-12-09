@@ -4,7 +4,7 @@ services:
     name: gptbots
     env: python
     buildCommand: "./bin/render-build.sh"
-    startCommand: "bundle exec puma -C config/puma.rb"
+    startCommand: "poetry run python main.py"
     envVars:
       - key: DISCORD_BOT_TOKEN
         sync: false 
