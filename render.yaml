@@ -1,0 +1,10 @@
+
+services:
+  - type: web
+    name: gptbots
+    env: python
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec puma -C config/puma.rb"
+    envVars:
+      - key: CHAT_GPT_SESSION_TOKEN
+      - key: DISCORD_BOT_TOKEN
