@@ -10,6 +10,8 @@ services:
         sync: false 
       - key: CHAT_GPT_SESSION_TOKEN
         sync: false 
+      - key: OPENAI_API_KEY
+        sync: false
       - fromGroup: GPTBotEnvs
       - key: PYTHON_VERSION
         value: 3.8.2

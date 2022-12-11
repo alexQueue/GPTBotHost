@@ -1,5 +1,5 @@
 import discord
-from . import gpt_chat_client
+from . import gpt_chat_client, davinci_client
 import os
 import traceback
 from discord.ext import commands
@@ -19,19 +19,19 @@ async def send_message(message, user_message, is_private):
             reply = await message.channel.send(thinking_message)
 
         # streamed
-        response = gpt_chat_client.streamed_response(user_message)
-        content = ""
-        for res in response:
-            # print(res['message'])
-            content = res['message'] + '...'
-            await reply.edit(content=content)
-        print("finished")
-        content = res['message'] + " ■"
-        await reply.edit(content=content)
+        # response = gpt_chat_client.streamed_response(user_message)
+        # content = ""
+        # for res in response:
+        #     # print(res['message'])
+        #     content = res['message'] + '...'
+        #     await reply.edit(content=content)
+        # print("finished")
+        # content = res['message'] + " ■"
+        # await reply.edit(content=content)
 
-      
-        # response = gpt_chat_client.handle_response(user_message)
-        # await reply.edit(content=response)
+        # not streamed
+        response = davinci_client.handle_response(user_message)
+        await reply.edit(content=response)
 
     except Exception as e:
         print(traceback.format_exc())
@@ -41,7 +41,8 @@ intents = discord.Intents(messages=True)
 
 
 def test_message():
-    msg = gpt_chat_client.handle_response("Are you working?")
+    # msg = gpt_chat_client.handle_response("Are you working?")
+    msg = davinci_client.handle_response("Are you alive?")
     print(msg)
 
 
