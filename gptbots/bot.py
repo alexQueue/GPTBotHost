@@ -11,7 +11,7 @@ logger = logging.getLogger('app')
 def stream_message(user_message, placeholder_msg):
   pass
 
-  
+
 # Send messages
 async def send_message(message, user_message, is_private):
     try:
