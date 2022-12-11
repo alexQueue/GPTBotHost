@@ -108,13 +108,11 @@ HOST = '0.0.0.0'  # Standard loopback interface address (localhost)
 PORT = 5000 # Don't know which pot
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+    s.bind((HOST, PORT))
+    s.listen()
 
-s.bind((HOST, PORT))
+    conn, addr = s.accept()
 
-s.listen()
+    with conn:
 
-conn, addr = s.accept()
-
-with conn:
-
-print('Connected by', addr)
+        print('Connected by', addr)
