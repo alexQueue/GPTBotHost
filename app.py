@@ -47,7 +47,7 @@ async def send_message(message, user_message, is_private):
         await reply.edit(content=response)
 
     except Exception as e:
-        app.logger.error(traceback.format_exc())
+        print(traceback.format_exc())
 
 
 intents = discord.Intents(messages=True)
@@ -57,7 +57,7 @@ def test_message():
     # msg = gpt_chat_client.handle_response("Are you working?")
     msg = davinci_client.handle_response("Are you alive?")
     
-    app.logger.info(msg)
+    print(msg)
 
 
 def run_discord_bot():
@@ -72,7 +72,7 @@ def run_discord_bot():
 
     async def on_ready():
         await tree.sync()
-        app.logger.info(f'{client.user} is now running!')
+        print(f'{client.user} is now running!')
 
     @client.event
     async def on_message(message):
@@ -85,7 +85,7 @@ def run_discord_bot():
         if len(user_message) == 0:
             return
 
-        app.logger.info(f"{username} said: '{user_message}' ({channel})")
+        print(f"{username} said: '{user_message}' ({channel})")
 
         if user_message[0] == '?':
             user_message = user_message[1:]
