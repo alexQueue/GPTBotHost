@@ -103,16 +103,33 @@ print("Got here")
 ####
 import socket
 
-HOST = '0.0.0.0'  # Standard loopback interface address (localhost)
+# Create a socket object
+s = socket.socket()
 
-PORT = 5000 # Don't know which pot
+# Bind the socket to the IP address and port
+s.bind(('0.0.0.0', 1234))
 
-with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-    s.bind((HOST, PORT))
-    s.listen()
+# Start listening for incoming connections
+s.listen()
 
-    conn, addr = s.accept()
+# Accept a connection
+conn, addr = s.accept()
 
-    with conn:
+# Print the client address
+print("Connection from: ", addr)
 
-        print('Connected by', addr)
+# import socket
+
+# HOST = '0.0.0.0'  # Standard loopback interface address (localhost)
+
+# PORT = 5000 # Don't know which pot
+
+# with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+#     s.bind((HOST, PORT))
+#     s.listen()
+
+#     conn, addr = s.accept()
+
+#     with conn:
+
+#         print('Connected by', addr)
