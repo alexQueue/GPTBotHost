@@ -1,5 +1,5 @@
 from flask import Flask
-import gptbots.bot
+from gptbots import bot
 
 app = Flask(__name__)
 
