@@ -3,7 +3,7 @@ services:
   - type: web
     name: gptbots
     env: python
-    buildCommand: "pip install git+https://github.com/Rapptz/discord.py && pip install -r requirements.txt"
+    buildCommand: "pip install --upgrade pip && pip install git+https://github.com/Rapptz/discord.py && pip install -r requirements.txt"
     startCommand: "gunicorn app"
     envVars:
       - key: DISCORD_BOT_TOKEN
