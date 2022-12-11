@@ -99,4 +99,22 @@ client.run(TOKEN)
 
 
 print("Got here")
-# run_discord_bot()
+
+####
+import socket
+
+HOST = '0.0.0.0'  # Standard loopback interface address (localhost)
+
+PORT = 5000 # Don't know which pot
+
+with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+
+s.bind((HOST, PORT))
+
+s.listen()
+
+conn, addr = s.accept()
+
+with conn:
+
+print('Connected by', addr)
