@@ -4,7 +4,7 @@ services:
     name: gptbots
     env: python
     buildCommand: "pip install --upgrade pip  && pip install -r requirements.txt"
-    startCommand: "gunicorn app"
+    startCommand: "python3 app.py"
     envVars:
       - key: DISCORD_BOT_TOKEN
         sync: false 
