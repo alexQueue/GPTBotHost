@@ -1,5 +1,5 @@
 import discord
-from . import davinci_client#gpt_chat_client
+from . import davinci_client
 import os
 import traceback
 from discord.ext import commands
@@ -36,8 +36,8 @@ async def send_message(message, user_message, is_private):
         response = davinci_client.handle_response(user_message)
         await reply.edit(content=response)
 
-#    except Exception as e:
-#        logger.error(traceback.format_exc())
+    except Exception as e:
+        logger.error(traceback.format_exc())
 
 
 intents = discord.Intents(messages=True)
