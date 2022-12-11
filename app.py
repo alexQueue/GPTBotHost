@@ -1,4 +1,4 @@
-from flask import Flask
+# from flask import Flask
 # from gptbots import bot
 import discord
 from gptbots import davinci_client
@@ -8,11 +8,11 @@ from discord.ext import commands
 from discord import app_commands
 import logging
 
-app = Flask(__name__)
+# app = Flask(__name__)
 
-@app.route('/')
-def hello_world():
-    return 'Hello, World!'
+# @app.route('/')
+# def hello_world():
+#     return 'Hello, World!'
 
 
 # if __name__ == '__main__':
