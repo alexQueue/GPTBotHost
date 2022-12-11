@@ -60,43 +60,43 @@ def test_message():
     print(msg)
 
 
-def run_discord_bot():
-    # Change your token here
-    TOKEN = os.getenv("DISCORD_BOT_TOKEN")
-    client = discord.Client(intents=intents)
-    tree = app_commands.CommandTree(client)
+# def run_discord_bot():
+# Change your token here
+TOKEN = os.getenv("DISCORD_BOT_TOKEN")
+client = discord.Client(intents=intents)
+tree = app_commands.CommandTree(client)
 
-    @tree.command(name="chatgpt", description="Use ChatGPT")
-    async def chat(interaction):
-        await interaction.response.send_message("Hello!")
+@tree.command(name="chatgpt", description="Use ChatGPT")
+async def chat(interaction):
+    await interaction.response.send_message("Hello!")
 
-    async def on_ready():
-        await tree.sync()
-        print(f'{client.user} is now running!')
+async def on_ready():
+    await tree.sync()
+    print(f'{client.user} is now running!')
 
-    @client.event
-    async def on_message(message):
-        if message.author == client.user:
-            return
+@client.event
+async def on_message(message):
+    if message.author == client.user:
+        return
 
-        username = str(message.author)
-        user_message = str(message.content)
-        channel = str(message.channel)
-        if len(user_message) == 0:
-            return
+    username = str(message.author)
+    user_message = str(message.content)
+    channel = str(message.channel)
+    if len(user_message) == 0:
+        return
 
-        print(f"{username} said: '{user_message}' ({channel})")
+    print(f"{username} said: '{user_message}' ({channel})")
 
-        if user_message[0] == '?':
-            user_message = user_message[1:]
-            await send_message(message, user_message, is_private=True)
-        else:
-            await send_message(message, user_message, is_private=False)
-
-    # Remember to run your bot with your personal TOKEN
-    client.run(TOKEN)
-
-
+    if user_message[0] == '?':
+        user_message = user_message[1:]
+        await send_message(message, user_message, is_private=True)
+    else:
+        await send_message(message, user_message, is_private=False)
 
 test_message()
-run_discord_bot()
+
+client.run(TOKEN)
+
+
+print("Got here")
+# run_discord_bot()
