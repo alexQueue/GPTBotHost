@@ -11,6 +11,8 @@ services:
       - key: CHAT_GPT_SESSION_TOKEN
         sync: false 
       - fromGroup: GPTBotEnvs
+      - key: PYTHON_VERSION
+        value: 3.8.2
 
 envVarGroups:
   - name: GPTBotEnvs
