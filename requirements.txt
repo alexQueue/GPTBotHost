@@ -1,0 +1,6 @@
+discord.py
+gunicorn
+revChatGPT
+openai
+langchain
+google-search-results

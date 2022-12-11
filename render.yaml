@@ -3,8 +3,8 @@ services:
   - type: web
     name: gptbots
     env: python
-    buildCommand: "./bin/render-build.sh"
-    startCommand: "poetry run python main.py"
+    buildCommand: "pip install -r requirements.txt$
+    startCommand: "gunicorn gptbots:app"
     envVars:
       - key: DISCORD_BOT_TOKEN
         sync: false 
