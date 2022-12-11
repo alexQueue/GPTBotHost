@@ -107,7 +107,7 @@ import socket
 s = socket.socket()
 
 # Bind the socket to the IP address and port
-s.bind(('0.0.0.0', 1234))
+s.bind(('0.0.0.0', 80))
 
 # Start listening for incoming connections
 s.listen()
