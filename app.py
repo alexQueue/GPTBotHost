@@ -1,25 +1,11 @@
-# from flask import Flask
-# from gptbots import bot
-import discord
 from gptbots import davinci_client
 import os
 import traceback
-from discord.ext import commands
-from discord import app_commands
+import nextcord
+from nextcord.ext import commands
+
+# from discord import app_commands
 import logging
-
-# app = Flask(__name__)
-
-# @app.route('/')
-# def hello_world():
-#     return 'Hello, World!'
-
-
-# if __name__ == '__main__':
-#     # single test message:
-# bot.test_message()
-# bot.run_discord_bot()
-
 
 
 # Send messages
@@ -60,76 +46,42 @@ def test_message():
     print(msg)
 
 
-# def run_discord_bot():
-# Change your token here
-TOKEN = os.getenv("DISCORD_BOT_TOKEN")
-client = discord.Client(intents=intents)
-tree = app_commands.CommandTree(client)
+def run_discord_bot():
+    # Change your token here
+    TOKEN = os.getenv("DISCORD_BOT_TOKEN")
+    client = discord.Client(intents=intents)
+    # tree = app_commands.CommandTree(client)
 
-@tree.command(name="chatgpt", description="Use ChatGPT")
-async def chat(interaction):
-    await interaction.response.send_message("Hello!")
+    # @tree.command(name="chatgpt", description="Use ChatGPT")
+    # async def chat(interaction):
+    #     await interaction.response.send_message("Hello!")
 
-async def on_ready():
-    await tree.sync()
-    print(f'{client.user} is now running!')
+    async def on_ready():
+        # await tree.sync()
+        print(f'{client.user} is now running!')
 
-@client.event
-async def on_message(message):
-    if message.author == client.user:
-        return
+    @client.event
+    async def on_message(message):
+        if message.author == client.user:
+            return
 
-    username = str(message.author)
-    user_message = str(message.content)
-    channel = str(message.channel)
-    if len(user_message) == 0:
-        return
+        username = str(message.author)
+        user_message = str(message.content)
+        channel = str(message.channel)
+        if len(user_message) == 0:
+            return
 
-    print(f"{username} said: '{user_message}' ({channel})")
+        print(f"{username} said: '{user_message}' ({channel})")
 
-    if user_message[0] == '?':
-        user_message = user_message[1:]
-        await send_message(message, user_message, is_private=True)
-    else:
-        await send_message(message, user_message, is_private=False)
+        if user_message[0] == '?':
+            user_message = user_message[1:]
+            await send_message(message, user_message, is_private=True)
+        else:
+            await send_message(message, user_message, is_private=False)
+
+    client.run(TOKEN)
+
 
 test_message()
 
-client.run(TOKEN)
-
-
-print("Got here")
-
-####
-import socket
-
-# Create a socket object
-s = socket.socket()
-
-# Bind the socket to the IP address and port
-s.bind(('0.0.0.0', 80))
-
-# Start listening for incoming connections
-s.listen()
-
-# Accept a connection
-conn, addr = s.accept()
-
-# Print the client address
-print("Connection from: ", addr)
-
-# import socket
-
-# HOST = '0.0.0.0'  # Standard loopback interface address (localhost)
-
-# PORT = 5000 # Don't know which pot
-
-# with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-#     s.bind((HOST, PORT))
-#     s.listen()
-
-#     conn, addr = s.accept()
-
-#     with conn:
-
-#         print('Connected by', addr)
+run_discord_bot()

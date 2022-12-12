@@ -1,5 +1,5 @@
 gunicorn
-discord.py
+nextcord
 revChatGPT
 openai
 langchain
