@@ -17,19 +17,12 @@ async def send_message(message, content, is_private):
 
 # Send messages
 async def send_message(message, user_message, is_private):
-    try:
-        think = False
-        if think:
-            thinking_message = "Thinking. Give me a moment..."
-            reply = await send_message(message, thinking_message, is_private)
+    try:    
+        # await message.channel.trigger_typing()
+        async with message.channel.typing():
             response = davinci_client.handle_response(user_message)
-            await reply.edit(content=response)
-        else:
-            # await message.channel.trigger_typing()
-            async with message.channel.typing():
-                response = davinci_client.handle_response(user_message)
-            
-            await send_message(message, response, is_private)
+        
+        await send_message(message, response, is_private)
 
 
         # streamed
