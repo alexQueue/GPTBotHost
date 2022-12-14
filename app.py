@@ -8,14 +8,27 @@ from nextcord.ext import commands
 import logging
 
 
+async def send_message(message, content, is_private):
+    if is_private:
+        reply = await message.author.send(content)
+    else:
+        reply = await message.channel.send(content)
+    return reply
+
 # Send messages
 async def send_message(message, user_message, is_private):
     try:
-        thinking_message = "Thinking. Give me a moment..."
-        if is_private:
-            reply = await message.author.send(thinking_message)
+        think = False
+        if think:
+            thinking_message = "Thinking. Give me a moment..."
+            reply = await send_message(message, thinking_message, is_private)
+            response = davinci_client.handle_response(user_message)
+            await reply.edit(content=response)
         else:
-            reply = await message.channel.send(thinking_message)
+            async with message.channel.typing():
+                response = davinci_client.handle_response(user_message)
+                await send_message(message, response, is_private)
+
 
         # streamed
         # response = gpt_chat_client.streamed_response(user_message)
@@ -28,15 +41,12 @@ async def send_message(message, user_message, is_private):
         # content = res['message'] + " ■"
         # await reply.edit(content=content)
 
-        # not streamed
-        response = davinci_client.handle_response(user_message)
-        await reply.edit(content=response)
 
     except Exception as e:
         print(traceback.format_exc())
 
 
-intents = discord.Intents(messages=True)
+intents = nextcord.Intents(messages=True)
 
 
 def test_message():
@@ -49,7 +59,7 @@ def test_message():
 def run_discord_bot():
     # Change your token here
     TOKEN = os.getenv("DISCORD_BOT_TOKEN")
-    client = discord.Client(intents=intents)
+    client = nextcord.Client(intents=intents)
     # tree = app_commands.CommandTree(client)
 
     # @tree.command(name="chatgpt", description="Use ChatGPT")
