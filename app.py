@@ -1,14 +1,27 @@
+from dotenv import load_dotenv
+
 from gptbots import davinci_client
 import os
 import traceback
 import nextcord
+
+# from nextcord import app_commands
 from nextcord.ext import commands
+# import logging
 
-# from discord import app_commands
-import logging
+print("Starting up.")
+
+# intents = nextcord.Intents.default()
+# intents.message_content = True
+# bot = commands.Bot(command_prefix="$", intents=intents)
 
 
-async def send_message(message, content, is_private):
+# @bot.command()
+# async def hello(ctx):
+#     await ctx.reply("Hello!")
+
+# bot.run(TOKEN)
+async def reply_message(message, content, is_private):
     if is_private:
         reply = await message.author.send(content)
     else:
@@ -19,22 +32,12 @@ async def send_message(message, content, is_private):
 async def send_message(message, user_message, is_private):
     try:    
         # await message.channel.trigger_typing()
+        # response = davinci_client.handle_response(user_message)
         async with message.channel.typing():
             response = davinci_client.handle_response(user_message)
-        
-        await send_message(message, response, is_private)
+            # response = "Heard."
 
-
-        # streamed
-        # response = gpt_chat_client.streamed_response(user_message)
-        # content = ""
-        # for res in response:
-        #     # print(res['message'])
-        #     content = res['message'] + '...'
-        #     await reply.edit(content=content)
-        # print("finished")
-        # content = res['message'] + " ■"
-        # await reply.edit(content=content)
+        reply = await reply_message(message, response, is_private)
 
 
     except Exception as e:
@@ -43,16 +46,19 @@ async def send_message(message, user_message, is_private):
 
 intents = nextcord.Intents(messages=True)
 
-
 def test_message():
+    print("Firing off test message:")
     # msg = gpt_chat_client.handle_response("Are you working?")
-    msg = davinci_client.handle_response("Are you alive?")
+    msg = davinci_client.handle_response("You're alive now. Greet the world.")
     
     print(msg)
 
+test_message()
 
 def run_discord_bot():
+    print("Setting up bot.")
     # Change your token here
+    load_dotenv()
     TOKEN = os.getenv("DISCORD_BOT_TOKEN")
     client = nextcord.Client(intents=intents)
     # tree = app_commands.CommandTree(client)
@@ -85,8 +91,5 @@ def run_discord_bot():
             await send_message(message, user_message, is_private=False)
 
     client.run(TOKEN)
-
-
-test_message()
 
 run_discord_bot()

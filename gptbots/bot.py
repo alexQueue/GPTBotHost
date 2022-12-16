@@ -6,11 +6,16 @@ from discord.ext import commands
 from discord import app_commands
 import logging
 
+logger = logging.getLogger('app')
+
+def stream_message(user_message, placeholder_msg):
+  pass
+
 
 # Send messages
 async def send_message(message, user_message, is_private):
     try:
-        thinking_message = "Thinking. Give me a moment..."
+        thinking_message = "Temporarily removed."
         if is_private:
             reply = await message.author.send(thinking_message)
         else:
@@ -32,7 +37,7 @@ async def send_message(message, user_message, is_private):
         await reply.edit(content=response)
 
     except Exception as e:
-        print(traceback.format_exc())
+        logger.error(traceback.format_exc())
 
 
 intents = discord.Intents(messages=True)
@@ -42,7 +47,7 @@ def test_message():
     # msg = gpt_chat_client.handle_response("Are you working?")
     msg = davinci_client.handle_response("Are you alive?")
     
-    print(msg)
+    logger.info(msg)
 
 
 def run_discord_bot():
@@ -57,7 +62,7 @@ def run_discord_bot():
 
     async def on_ready():
         await tree.sync()
-        print(f'{client.user} is now running!')
+        logger.info(f'{client.user} is now running!')
 
     @client.event
     async def on_message(message):
@@ -70,7 +75,7 @@ def run_discord_bot():
         if len(user_message) == 0:
             return
 
-        print(f"{username} said: '{user_message}' ({channel})")
+        logger.info(f"{username} said: '{user_message}' ({channel})")
 
         if user_message[0] == '?':
             user_message = user_message[1:]
@@ -78,6 +83,6 @@ def run_discord_bot():
         else:
             await send_message(message, user_message, is_private=False)
 
-test_message()
+    # Remember to run your bot with your personal TOKEN
+    client.run(TOKEN)
 
-run_discord_bot()

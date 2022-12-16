@@ -1,6 +1,7 @@
+nextcord>=2.1.0
 gunicorn
-nextcord
 revChatGPT
 openai
 langchain
 google-search-results
+python-dotenv

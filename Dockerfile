@@ -3,4 +3,4 @@ WORKDIR /gptbots
 COPY requirements.txt /gptbots/
 RUN pip install -r requirements.txt
 COPY . /gptbots
-CMD python app.py
+CMD python3 app.py

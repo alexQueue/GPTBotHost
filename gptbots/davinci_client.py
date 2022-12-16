@@ -11,8 +11,6 @@ Assistant is designed to be able to assist with a wide range of tasks, from answ
 
 Assistant is constantly learning and improving, and its capabilities are constantly evolving. It is able to process and understand large amounts of text, and can use this knowledge to provide accurate and informative responses to a wide range of questions. Additionally, Assistant is able to generate its own text based on the input it receives, allowing it to engage in discussions and provide explanations and descriptions on a wide range of topics.
 
-If the assistant does not know the answer, assistant should respond that it does not know the answer.
-
 Overall, Assistant is a powerful tool that can help with a wide range of tasks and provide valuable insights and information on a wide range of topics. Whether you need help with a specific question or just want to have a conversation about a particular topic, Assistant is here to assist.
 
 {history}
@@ -39,11 +37,11 @@ def handle_response(request) -> str:
     return output
 
 
-if __name__ == "__main__":
-  while(True):
-    request = input('Input:\n') 
-    
-    output = handle_response(request)
-    print(output)
+# if __name__ == "__main__":
+#   while(True):
+#     request = input('Input:\n') 
+
+#     output = handle_response(request)
+#     print(output)
 
 
