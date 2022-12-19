@@ -15,19 +15,16 @@ intents = nextcord.Intents(messages=True)
 
 # Send messages
 async def send_message(message, user_message, is_private):
-    try:    
-        # await message.channel.trigger_typing()
-        # response = davinci_client.handle_response(user_message)
-        async with message.channel.typing():
-            response = davinci_client.handle_response(user_message)
+    # try:    
+    # await message.channel.trigger_typing()
+    # response = davinci_client.handle_response(user_message)
+    async with message.channel.typing():
+        response = davinci_client.handle_response(user_message)
 
-        if is_private:
-            reply = await message.author.send(response)
-        else:
-            reply = await message.channel.send(response)
-
-# except Exception as e:
-#     print(traceback.format_exc())
+    if is_private:
+        reply = await message.author.send(response)
+    else:
+        reply = await message.channel.send(response)
 
 def test_message():
     print("Firing off test message:")
