@@ -1,4 +1,4 @@
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 
 from gptbots import davinci_client
 import os
@@ -11,23 +11,6 @@ from nextcord.ext import commands
 
 print("Starting up.")
 
-# intents = nextcord.Intents.default()
-# intents.message_content = True
-# bot = commands.Bot(command_prefix="$", intents=intents)
-
-
-# @bot.command()
-# async def hello(ctx):
-#     await ctx.reply("Hello!")
-
-# bot.run(TOKEN)
-async def reply_message(message, content, is_private):
-    if is_private:
-        reply = await message.author.send(content)
-    else:
-        reply = await message.channel.send(content)
-    return reply
-
 # Send messages
 async def send_message(message, user_message, is_private):
     try:    
@@ -35,13 +18,15 @@ async def send_message(message, user_message, is_private):
         # response = davinci_client.handle_response(user_message)
         async with message.channel.typing():
             response = davinci_client.handle_response(user_message)
-            # response = "Heard."
 
-        reply = await reply_message(message, response, is_private)
+        if is_private:
+            reply = await message.author.send(response)
+        else:
+            reply = await message.channel.send(response)
 
 
-    except Exception as e:
-        print(traceback.format_exc())
+    # except Exception as e:
+    #     print(traceback.format_exc())
 
 
 intents = nextcord.Intents(messages=True)
@@ -58,7 +43,7 @@ test_message()
 def run_discord_bot():
     print("Setting up bot.")
     # Change your token here
-    load_dotenv()
+    # load_dotenv()
     TOKEN = os.getenv("DISCORD_BOT_TOKEN")
     client = nextcord.Client(intents=intents)
     # tree = app_commands.CommandTree(client)

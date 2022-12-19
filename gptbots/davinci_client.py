@@ -1,9 +1,9 @@
 import os
-os.environ["OPENAI_API_KEY"]
 
 from langchain import OpenAI, ConversationChain, LLMChain, PromptTemplate
 from langchain.chains.conversation.memory import ConversationalBufferWindowMemory, ConversationBufferMemory
 
+os.environ["OPENAI_API_KEY"]
 
 template = """Assistant is a large language model trained by OpenAI.
 
@@ -37,11 +37,11 @@ def handle_response(request) -> str:
     return output
 
 
-# if __name__ == "__main__":
-#   while(True):
-#     request = input('Input:\n') 
+if __name__ == "__main__":
+  while(True):
+    request = input('Input:\n') 
 
-#     output = handle_response(request)
-#     print(output)
+    output = handle_response(request)
+    print(output)
 
 
