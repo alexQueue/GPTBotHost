@@ -11,6 +11,8 @@ from nextcord.ext import commands
 
 print("Starting up.")
 
+intents = nextcord.Intents(messages=True)
+
 # Send messages
 async def send_message(message, user_message, is_private):
     try:    
@@ -24,12 +26,8 @@ async def send_message(message, user_message, is_private):
         else:
             reply = await message.channel.send(response)
 
-
 # except Exception as e:
 #     print(traceback.format_exc())
-
-
-intents = nextcord.Intents(messages=True)
 
 def test_message():
     print("Firing off test message:")
