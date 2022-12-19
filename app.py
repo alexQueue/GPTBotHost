@@ -25,8 +25,8 @@ async def send_message(message, user_message, is_private):
             reply = await message.channel.send(response)
 
 
-    # except Exception as e:
-    #     print(traceback.format_exc())
+# except Exception as e:
+#     print(traceback.format_exc())
 
 
 intents = nextcord.Intents(messages=True)
