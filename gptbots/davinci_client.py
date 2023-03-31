@@ -1,7 +1,7 @@
 import os
 
 from langchain import OpenAI, ConversationChain, LLMChain, PromptTemplate
-from langchain.chains.conversation.memory import ConversationalBufferWindowMemory, ConversationBufferMemory
+from langchain.memory import ConversationBufferWindowMemory
 
 os.environ["OPENAI_API_KEY"]
 
@@ -27,7 +27,7 @@ chatgpt_chain = LLMChain(
     prompt=prompt,
     verbose=False,
     #memory = ConversationBufferMemory(memory_key="chat_history") 
-    memory=ConversationalBufferWindowMemory(k=5),
+    memory=ConversationBufferWindowMemory(k=5),
 )
 
 
